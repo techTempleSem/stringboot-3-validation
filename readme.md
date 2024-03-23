@@ -10,3 +10,6 @@
 - @FutureOrPresent : 현재 시간이나 미래 시간
 
 - @Valid : 컨트롤러 입력 받을 때 붙여주면 입력받으면서 검증도 해줌
+
+
+BindingResult : @valid가 실행되었을 때 결과를 qustndp sjgdjwna

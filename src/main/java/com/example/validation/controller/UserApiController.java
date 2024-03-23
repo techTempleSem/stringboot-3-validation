@@ -1,22 +1,35 @@
 package com.example.validation.controller;
 
+import com.example.validation.model.Api;
 import com.example.validation.model.UserRegisterRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
 @RequestMapping("/api/user")
 public class UserApiController {
     @PostMapping("")
-    public UserRegisterRequest register(
+    public Api<UserRegisterRequest> register(
             @Valid
             @RequestBody
-            UserRegisterRequest userRegisterRequest
+            Api<UserRegisterRequest> userRegisterRequest
     ){
         log.info("init : {}",userRegisterRequest);
 
-        return userRegisterRequest;
+        var body = userRegisterRequest.getData();
+        Api<UserRegisterRequest> response = Api.<UserRegisterRequest>builder()
+                .data(body)
+                .resultCode(String.valueOf(HttpStatus.OK.value()))
+                .resultMessage(HttpStatus.OK.getReasonPhrase())
+                .build();
+
+        return response;
     }
 }
